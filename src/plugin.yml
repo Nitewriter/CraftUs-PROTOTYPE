@@ -1,0 +1,10 @@
+name: CraftUs
+version: 1.0
+main: br.com.abidux.craftus.Main
+author: abidux
+description: CraftUs by abidux
+commands:
+  craftus:
+  search:
+  lobby:
+    aliases: [hub]

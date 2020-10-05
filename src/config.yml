@@ -1,0 +1,21 @@
+prefix: '&9[CraftUs]'
+
+messages:
+  you_are_not_allowed_to_do_this: '&cYou are not allowed to do this.'
+  create: '&eCreate'
+  click_to_create: '&aClick to create'
+  search: '&eSearch'
+  click_to_search: '&aClick to search'
+  send_name: "&aSend the map's name."
+  map_created: '&aMap created.'
+  click_to_edit: '&aClick to edit'
+  previous: '&cPrevious'
+  next: '&aNext'
+  edit_map: '&eEdit Map'
+  modified: '&aModified.'
+  joined: '&a%player% joined &a(&8%players%&e/&810&a)'
+  left: '&c%player% left &c(&8%players%&4/&810&c)'
+  impostor_title: '&cImpostor'
+  impostor_subtitle: '&eKill everybody'
+  crewmate_title: '&bCrewmate'
+  crewmate_subtitle: '&eDo your tasks'
