@@ -13,13 +13,13 @@ public class MeetingButton {
 
     private final ItemStack item;
     private final Location location;
-    public int coolDown = 90;
     private final ArmorStand stand;
+    public int coolDown = 90;
 
     public MeetingButton(Location location) {
         this.location = location;
-        this.item = HeadItem.MEETING_BUTTON.getHead();
-        this.stand = createStand();
+        item = HeadItem.MEETING_BUTTON.getHead();
+        stand = createStand();
     }
 
     private ArmorStand createStand() {
@@ -29,7 +29,7 @@ public class MeetingButton {
         as.setCustomNameVisible(true);
         as.setGravity(false);
         as.setVisible(false);
-        as.setHelmet(item);
+        as.getEquipment().setHelmet(item);
         as.setRemoveWhenFarAway(false);
         return as;
     }

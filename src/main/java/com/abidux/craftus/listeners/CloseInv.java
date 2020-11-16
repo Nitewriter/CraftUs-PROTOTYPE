@@ -36,14 +36,14 @@ public class CloseInv implements Listener {
             profile.setTask(null);
         }
         try {
-            if (e.getInventory().getName().equals("�9Create Maze")) {
+            if (e.getView().getTitle().equals("�9Create Maze")) {
                 MazeCrewTask task = new MazeCrewTask(e.getPlayer().getLocation(), e.getInventory());
                 InvClick.tasks.put(task.getStand(), task);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        if (!e.getInventory().getName().equals("�9Voting")) {
+        if (!e.getView().getTitle().equals("�9Voting")) {
             return;
         }
         new BukkitRunnable() {

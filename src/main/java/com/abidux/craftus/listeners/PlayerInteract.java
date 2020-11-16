@@ -46,7 +46,7 @@ public class PlayerInteract implements Listener {
             return;
         }
 
-        if (damager.getItemInHand().equals(Matches.getImpostorSword()) && !(playerProfile.getType().equals(PlayerType.IMPOSTOR) || playerProfile.getType().equals(PlayerType.DEAD_CREWMATE) || playerProfile.getType().equals(PlayerType.DEAD_IMPOSTOR))) {
+        if (damager.getEquipment().getItemInMainHand().equals(Matches.getImpostorSword()) && !(playerProfile.getType().equals(PlayerType.IMPOSTOR) || playerProfile.getType().equals(PlayerType.DEAD_CREWMATE) || playerProfile.getType().equals(PlayerType.DEAD_IMPOSTOR))) {
             Matches.killPlayer(playerProfile);
         }
 

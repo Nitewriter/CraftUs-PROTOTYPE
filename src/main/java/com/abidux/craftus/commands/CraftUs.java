@@ -74,7 +74,7 @@ public class CraftUs implements CommandExecutor {
                 inv.setItem(12, HeadItem.PLUS.getHead());
                 inv.setItem(14, HeadItem.BOOK.getHead());
                 player.openInventory(inv);
-                player.playSound(player.getLocation(), Sound.CLICK, 1, 1);
+                player.playSound(player.getLocation(), Sound.UI_BUTTON_CLICK, 1, 1);
                 return true;
             } else {
                 sender.sendMessage(DisplayMessage.PREFIX.toString() + DisplayMessage.YOU_ARE_NOT_ALLOWED_TO_DO_THIS);

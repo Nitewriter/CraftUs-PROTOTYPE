@@ -4,7 +4,6 @@ import com.abidux.craftus.Main;
 import com.abidux.craftus.enums.HeadItem;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -29,7 +28,7 @@ public class MazeCrewTask extends CrewTask {
         Inventory inventory = Bukkit.createInventory(null, 6 * 9, "�6Click Task");
         for (int i = 0; i < this.inventory.getSize(); i++) {
             ItemStack item = this.inventory.getItem(i);
-            if (item != null && item.getType().equals(Material.STAINED_GLASS_PANE)) {
+            if (item != null && item.getType().equals(Button.isNotToggledMaterial)) {
                 inventory.setItem(i, new Button(buttons, i).getButton());
             }
         }
@@ -55,9 +54,9 @@ public class MazeCrewTask extends CrewTask {
     @Override
     public void save(String path, String type) {
         super.save(path, type);
-        List<Integer> itemsSlot = new ArrayList<Integer>();
+        List<Integer> itemsSlot = new ArrayList<>();
         for (int i = 0; i < inventory.getSize(); i++) {
-            if (inventory.getItem(i) != null && inventory.getItem(i).getType().equals(Material.STAINED_GLASS_PANE)) {
+            if (inventory.getItem(i) != null && inventory.getItem(i).getType().equals(Button.isNotToggledMaterial)) {
                 itemsSlot.add(i);
             }
         }

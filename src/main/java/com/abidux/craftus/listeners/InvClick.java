@@ -39,6 +39,10 @@ public class InvClick implements Listener {
     @SuppressWarnings("deprecation")
     @EventHandler
     void click(InventoryClickEvent e) {
+        if (e.getCurrentItem() == null) {
+            return;
+        }
+
         try {
             Player player = (Player) e.getWhoClicked();
             CraftUsProfile profile = Main.profiles.get(player);
@@ -46,18 +50,18 @@ public class InvClick implements Listener {
                 e.setCancelled(true);
                 return;
             }
-            if (e.getClickedInventory().getName().equals(DisplayMessage.PREFIX.toString())) {
+            if (e.getView().getTitle().equals(DisplayMessage.PREFIX.toString())) {
                 e.setCancelled(true);
                 if (e.getCurrentItem().equals(HeadItem.PLUS.getHead())) {
                     e.getWhoClicked().closeInventory();
                     Chat.players.add(player);
                     e.getWhoClicked().sendMessage(DisplayMessage.PREFIX.toString() + DisplayMessage.SEND_NAME);
-                    player.playSound(player.getLocation(), Sound.CLICK, 1, 1);
+                    player.playSound(player.getLocation(), Sound.UI_BUTTON_CLICK, 1, 1);
                 } else if (e.getCurrentItem().equals(HeadItem.BOOK.getHead())) {
                     page.put(player, 0);
                     openSearch(player);
                 }
-            } else if (e.getClickedInventory().getName().equals(DisplayMessage.PREFIX.toString() + "- Maps")) {
+            } else if (e.getView().getTitle().equals(DisplayMessage.PREFIX.toString() + "- Maps")) {
                 e.setCancelled(true);
                 if (e.getCurrentItem().equals(getPrevious())) {
                     page.put(player, page.get(player) - 1);
@@ -74,33 +78,33 @@ public class InvClick implements Listener {
                     inv.setItem(15, HeadItem.X.getHead());
                     editing.put(player, GameMaps.maps.get(mapName));
                     player.openInventory(inv);
-                    player.playSound(player.getLocation(), Sound.CLICK, 1, 1);
+                    player.playSound(player.getLocation(), Sound.UI_BUTTON_CLICK, 1, 1);
                 }
-            } else if (e.getClickedInventory().getName().equals(DisplayMessage.PREFIX.toString() + DisplayMessage.EDIT_MAP)) {
+            } else if (e.getView().getTitle().equals(DisplayMessage.PREFIX.toString() + DisplayMessage.EDIT_MAP)) {
                 if (e.getCurrentItem().equals(HeadItem.BED.getHead())) {
                     editing.get(player).setSpawn(player.getLocation());
                     player.closeInventory();
                     editing.remove(player);
                     player.sendMessage(DisplayMessage.PREFIX.toString() + DisplayMessage.MODIFIED);
-                    player.playSound(player.getLocation(), Sound.LEVEL_UP, 1, 1);
+                    player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
                 } else if (e.getCurrentItem().equals(HeadItem.X.getHead())) {
                     GameMaps.maps.remove(editing.get(player).getName().toLowerCase());
                     player.closeInventory();
                     player.sendMessage(DisplayMessage.PREFIX.toString() + DisplayMessage.MODIFIED);
-                    player.playSound(player.getLocation(), Sound.LEVEL_UP, 1, 1);
+                    player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
                 } else if (e.getCurrentItem().equals(getChangeName())) {
                     player.closeInventory();
                     player.sendMessage(DisplayMessage.PREFIX.toString() + DisplayMessage.SEND_NAME);
                     Chat.editingName.add(player);
-                    player.playSound(player.getLocation(), Sound.CLICK, 1, 1);
+                    player.playSound(player.getLocation(), Sound.UI_BUTTON_CLICK, 1, 1);
                 }
-            } else if (e.getClickedInventory().getName().equals("�9Voting")) {
+            } else if (e.getView().getTitle().equals("�9Voting")) {
                 e.setCancelled(true);
                 if (items.containsKey(e.getCurrentItem()) && !Matches.voted.contains((Player) e.getWhoClicked())) {
                     items.get(e.getCurrentItem()).accept((Player) e.getWhoClicked());
                     Matches.voted.add((Player) e.getWhoClicked());
                 }
-            } else if (e.getClickedInventory().getName().equals("�9Tasks")) {
+            } else if (e.getView().getTitle().equals("�9Tasks")) {
                 e.setCancelled(true);
                 if (e.getCurrentItem().equals(HeadItem.ELECTRIC.getHead())) {
                     ElectricCrewTask task = new ElectricCrewTask(player.getLocation());
@@ -108,7 +112,7 @@ public class InvClick implements Listener {
                     e.getWhoClicked().closeInventory();
                 } else if (e.getCurrentItem().equals(HeadItem.MAZE.getHead())) {
                     Inventory inv = Bukkit.createInventory(null, 6 * 9, "�9Create Maze");
-                    inv.setItem(0, new ItemStack(Material.STAINED_GLASS_PANE, 64, DyeColor.RED.getWoolData()));
+                    inv.setItem(0, new ItemStack(Button.isNotToggledMaterial, 64));
                     e.getWhoClicked().closeInventory();
                     player.openInventory(inv);
                 } else if (e.getCurrentItem().equals(HeadItem.METEORITE.getHead())) {
@@ -128,7 +132,7 @@ public class InvClick implements Listener {
                     tasks.put(task.getStand(), task);
                     e.getWhoClicked().closeInventory();
                 }
-            } else if (e.getClickedInventory().getName().equals("�6Click Task")) {
+            } else if (e.getView().getTitle().equals("�6Click Task")) {
                 e.setCancelled(true);
                 CrewTask task = Main.profiles.get(player).getTask();
                 if (task == null) {
@@ -180,6 +184,7 @@ public class InvClick implements Listener {
                     }
                 } else if (task instanceof MeteorCrewTask) {
                     MeteorCrewTask meteorCrewTask = (MeteorCrewTask) task;
+
                     if (e.getCurrentItem().equals(HeadItem.METEORITE.getHead())) {
                         meteorCrewTask.addMeteor();
                         player.getOpenInventory().setItem(e.getSlot(), null);
@@ -203,7 +208,7 @@ public class InvClick implements Listener {
                         player.updateInventory();
                     }
                 }
-            } else if (e.getClickedInventory().getName().equals("�9Comms Task")) {
+            } else if (e.getView().getTitle().equals("�9Comms Task")) {
                 e.setCancelled(true);
                 CrewTask task = Main.profiles.get(player).getTask();
                 if (task == null) {
@@ -234,7 +239,7 @@ public class InvClick implements Listener {
                         }
                     }
                 }
-            } else if (e.getClickedInventory().getName().equals("�9Wires Task")) {
+            } else if (e.getView().getTitle().equals("�9Wires Task")) {
                 e.setCancelled(true);
                 CrewTask task = Main.profiles.get(player).getTask();
                 if (task == null) {
@@ -257,7 +262,7 @@ public class InvClick implements Listener {
                         }
                     }
                 }
-            } else if (e.getClickedInventory().getName().equals("�9LevelTask")) {
+            } else if (e.getView().getTitle().equals("�9LevelTask")) {
                 e.setCancelled(true);
                 CrewTask task = Main.profiles.get(player).getTask();
                 if (task == null) {
@@ -316,12 +321,12 @@ public class InvClick implements Listener {
             inv.setItem(53, getNext());
         }
         player.openInventory(inv);
-        player.playSound(player.getLocation(), Sound.CLICK, 1, 1);
+        player.playSound(player.getLocation(), Sound.UI_BUTTON_CLICK, 1, 1);
     }
 
     @SuppressWarnings("deprecation")
     private ItemStack getNext() {
-        ItemStack next = new ItemStack(Material.CARPET, 1, DyeColor.LIME.getWoolData());
+        ItemStack next = new ItemStack(Material.LIME_CARPET, 1, DyeColor.LIME.getWoolData());
         ItemMeta nextMeta = next.getItemMeta();
         nextMeta.setDisplayName(DisplayMessage.NEXT.toString());
         next.setItemMeta(nextMeta);
@@ -330,7 +335,7 @@ public class InvClick implements Listener {
 
     @SuppressWarnings("deprecation")
     private ItemStack getPrevious() {
-        ItemStack previous = new ItemStack(Material.CARPET, 1, DyeColor.RED.getWoolData());
+        ItemStack previous = new ItemStack(Material.RED_CARPET, 1, DyeColor.RED.getWoolData());
         ItemMeta previousMeta = previous.getItemMeta();
         previousMeta.setDisplayName(DisplayMessage.PREVIOUS.toString());
         previous.setItemMeta(previousMeta);

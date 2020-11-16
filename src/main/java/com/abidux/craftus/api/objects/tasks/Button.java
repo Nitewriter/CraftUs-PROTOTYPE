@@ -1,13 +1,15 @@
 package com.abidux.craftus.api.objects.tasks;
 
 import com.abidux.craftus.utils.ItemBuilder;
-import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
 
 public class Button {
+
+    public static Material isToggledMaterial = Material.GREEN_STAINED_GLASS_PANE;
+    public static Material isNotToggledMaterial = Material.RED_STAINED_GLASS_PANE;
 
     private boolean toggled = false;
 
@@ -17,7 +19,8 @@ public class Button {
 
     @SuppressWarnings("deprecation")
     public ItemStack getButton() {
-        return new ItemBuilder().type(Material.STAINED_GLASS_PANE).durability(toggled ? DyeColor.LIME.getWoolData() : DyeColor.RED.getWoolData()).name("�7").build();
+        Material material = toggled ? isToggledMaterial : isNotToggledMaterial;
+        return new ItemBuilder().type(material).name("�7").build();
     }
 
     public boolean isToggled() {
