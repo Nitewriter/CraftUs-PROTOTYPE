@@ -14,14 +14,13 @@ import com.abidux.craftus.enums.HeadItem;
 import com.abidux.craftus.enums.PlayerColor;
 import com.abidux.craftus.listeners.*;
 import com.abidux.craftus.utils.SkullBuilder;
-import net.minecraft.server.v1_8_R3.IChatBaseComponent;
-import net.minecraft.server.v1_8_R3.PacketPlayOutChat;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -64,6 +63,11 @@ public class Main extends JavaPlugin {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void actionbar(Player player, String message) {
+        TextComponent textComponent = new TextComponent(message);
+        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, textComponent);
     }
 
     @Override
@@ -137,7 +141,7 @@ public class Main extends JavaPlugin {
                 case "com.abidux.craftus.api.objects.tasks.MazeCrewTask": {
                     Inventory inventory = Bukkit.createInventory(null, stands.getInt(stand + ".invsize"), "�6Click Task");
                     for (int i : stands.getIntegerList(stand + ".inventory")) {
-                        inventory.setItem(i, new ItemStack(Material.STAINED_GLASS_PANE));
+                        inventory.setItem(i, new ItemStack(Material.WHITE_STAINED_GLASS_PANE));
                     }
                     MazeCrewTask task = new MazeCrewTask(location, inventory);
                     InvClick.tasks.put(task.getStand(), task);
@@ -240,11 +244,6 @@ public class Main extends JavaPlugin {
 
     private String getMessage(String path) {
         return getConfig().getString(path).replace("&", "�");
-    }
-
-    public static void actionbar(Player player, String message) {
-        PacketPlayOutChat packet = new PacketPlayOutChat(IChatBaseComponent.ChatSerializer.a("{\"text\":\"" + message + "\"}"), (byte) 2);
-        ((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
     }
 
 }

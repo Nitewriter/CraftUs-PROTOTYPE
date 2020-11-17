@@ -17,7 +17,7 @@ public class CrewTask {
     public CrewTask(Location location, ItemStack item) {
         this.location = location;
         this.item = item;
-        this.stand = createStand();
+        stand = createStand();
     }
 
     private ArmorStand createStand() {
@@ -26,8 +26,8 @@ public class CrewTask {
         as.setCustomName("�eTask");
         as.setCustomNameVisible(true);
         as.setGravity(false);
+        as.getEquipment().setHelmet(item);
         as.setVisible(false);
-        as.setHelmet(item);
         as.setRemoveWhenFarAway(false);
         return as;
     }

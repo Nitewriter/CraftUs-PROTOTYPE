@@ -26,13 +26,13 @@ public class LevelCrewTask extends CrewTask {
     @SuppressWarnings("deprecation")
     public void openTask(Player player) {
         ArrayList<ItemStack> items = new ArrayList<>();
-        items.add(new ItemBuilder().type(Material.WOOL).durability(DyeColor.LIGHT_BLUE.getWoolData()).name("�bButton").build());
-        items.add(new ItemBuilder().type(Material.WOOL).durability(DyeColor.MAGENTA.getWoolData()).name("�dButton").build());
-        items.add(new ItemBuilder().type(Material.WOOL).durability(DyeColor.ORANGE.getWoolData()).name("�6Button").build());
-        items.add(new ItemBuilder().type(Material.WOOL).durability(DyeColor.RED.getWoolData()).name("�cButton").flags(ItemFlag.HIDE_ENCHANTS).enchantment(Enchantment.DURABILITY, 1).build());
-        items.add(new ItemBuilder().type(Material.WOOL).durability(DyeColor.LIME.getWoolData()).name("�aButton").build());
-        items.add(new ItemBuilder().type(Material.WOOL).durability(DyeColor.BLUE.getWoolData()).name("�1Button").build());
-        items.add(new ItemBuilder().type(Material.WOOL).durability(DyeColor.PURPLE.getWoolData()).name("�5Button").build());
+        items.add(new ItemBuilder().type(Material.LIGHT_BLUE_WOOL).durability(DyeColor.LIGHT_BLUE.getWoolData()).name("�bButton").build());
+        items.add(new ItemBuilder().type(Material.MAGENTA_WOOL).durability(DyeColor.MAGENTA.getWoolData()).name("�dButton").build());
+        items.add(new ItemBuilder().type(Material.ORANGE_WOOL).durability(DyeColor.ORANGE.getWoolData()).name("�6Button").build());
+        items.add(new ItemBuilder().type(Material.RED_WOOL).durability(DyeColor.RED.getWoolData()).name("�cButton").flags(ItemFlag.HIDE_ENCHANTS).enchantment(Enchantment.DURABILITY, 1).build());
+        items.add(new ItemBuilder().type(Material.LIME_WOOL).durability(DyeColor.LIME.getWoolData()).name("�aButton").build());
+        items.add(new ItemBuilder().type(Material.BLUE_WOOL).durability(DyeColor.BLUE.getWoolData()).name("�1Button").build());
+        items.add(new ItemBuilder().type(Material.PURPLE_WOOL).durability(DyeColor.PURPLE.getWoolData()).name("�5Button").build());
         Collections.shuffle(items);
         Inventory inventory = Bukkit.createInventory(null, 3 * 9, "�9LevelTask");
         for (int i = 0; i < items.size(); i++) {

@@ -27,18 +27,18 @@ public class WiresCrewTask extends CrewTask {
     @SuppressWarnings("deprecation")
     public WiresCrewTask(Location location) {
         super(location, HeadItem.MYSTERY_BOX.getHead());
-        color.put(DyeColor.LIGHT_BLUE, new ItemBuilder().type(Material.WOOL).name("�bWire").durability(DyeColor.LIGHT_BLUE.getWoolData()).build());
-        color.put(DyeColor.RED, new ItemBuilder().type(Material.WOOL).name("�cWire").durability(DyeColor.RED.getWoolData()).build());
-        color.put(DyeColor.ORANGE, new ItemBuilder().type(Material.WOOL).name("�6Wire").durability(DyeColor.ORANGE.getWoolData()).build());
-        color.put(DyeColor.MAGENTA, new ItemBuilder().type(Material.WOOL).name("�dWire").durability(DyeColor.MAGENTA.getWoolData()).build());
+        color.put(DyeColor.LIGHT_BLUE, new ItemBuilder().type(Material.LIGHT_BLUE_WOOL).name("�bWire").durability(DyeColor.LIGHT_BLUE.getWoolData()).build());
+        color.put(DyeColor.RED, new ItemBuilder().type(Material.RED_WOOL).name("�cWire").durability(DyeColor.RED.getWoolData()).build());
+        color.put(DyeColor.ORANGE, new ItemBuilder().type(Material.ORANGE_WOOL).name("�6Wire").durability(DyeColor.ORANGE.getWoolData()).build());
+        color.put(DyeColor.MAGENTA, new ItemBuilder().type(Material.MAGENTA_WOOL).name("�dWire").durability(DyeColor.MAGENTA.getWoolData()).build());
     }
 
     public void openTask(Player player) {
-        ItemStack[] itens = getWires();
+        ItemStack[] wireItems = getWires();
         Inventory inventory = Bukkit.createInventory(null, 4 * 9, "�9Wires Task");
         int[] slots = {1, 7, 10, 16, 19, 25, 28, 34};
         for (int i = 0; i < 8; i++) {
-            inventory.setItem(slots[i], itens[i]);
+            inventory.setItem(slots[i], wireItems[i]);
         }
         player.openInventory(inventory);
     }

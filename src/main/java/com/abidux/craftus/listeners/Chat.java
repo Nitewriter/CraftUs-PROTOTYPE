@@ -27,7 +27,7 @@ public class Chat implements Listener {
             players.remove(e.getPlayer());
             GameMaps.createMap(e.getMessage().trim(), e.getPlayer().getLocation());
             e.getPlayer().sendMessage(DisplayMessage.PREFIX.toString() + DisplayMessage.MAP_CREATED);
-            e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.LEVEL_UP, 1, 1);
+            e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
             return;
         }
         if (editingName.contains(e.getPlayer())) {
@@ -39,7 +39,7 @@ public class Chat implements Listener {
             InvClick.editing.remove(e.getPlayer());
             editingName.remove(e.getPlayer());
             e.getPlayer().sendMessage(DisplayMessage.PREFIX.toString() + DisplayMessage.MODIFIED);
-            e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.LEVEL_UP, 1, 1);
+            e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
             return;
         }
         CraftUsProfile profile = Main.profiles.get(e.getPlayer());

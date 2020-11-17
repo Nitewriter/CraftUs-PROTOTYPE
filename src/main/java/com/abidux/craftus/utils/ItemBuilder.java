@@ -4,6 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ public class ItemBuilder {
     }
 
     public ItemBuilder enchantment(Enchantment enchantment, int level) {
-        this.enchantments.put(enchantment, level);
+        enchantments.put(enchantment, level);
         return this;
     }
 
@@ -59,23 +60,28 @@ public class ItemBuilder {
     }
 
     public ItemStack build() {
-        ItemStack item = new ItemStack(this.material);
-        item.setAmount(this.amount);
-        if (!this.enchantments.isEmpty()) {
-            item.addUnsafeEnchantments(this.enchantments);
+        ItemStack item = new ItemStack(material);
+        item.setAmount(amount);
+        if (!enchantments.isEmpty()) {
+            item.addUnsafeEnchantments(enchantments);
         }
-        if (this.durability != -1) {
-            item.setDurability((short) this.durability);
-        }
+
         ItemMeta meta = item.getItemMeta();
-        if (this.flags != null) {
-            meta.addItemFlags(this.flags);
+        if (meta == null) {
+            return item;
         }
-        if (this.name != null) {
-            meta.setDisplayName(this.name);
+
+        if (durability != -1) {
+            ((Damageable) meta).setDamage(durability);
         }
-        if (this.lore != null) {
-            meta.setLore(this.lore);
+        if (flags != null) {
+            meta.addItemFlags(flags);
+        }
+        if (name != null) {
+            meta.setDisplayName(name);
+        }
+        if (lore != null) {
+            meta.setLore(lore);
         }
         item.setItemMeta(meta);
         return item;

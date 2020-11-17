@@ -26,6 +26,9 @@ import java.util.stream.Collectors;
 
 public class Matches {
 
+    private static final ItemStack sword = new ItemBuilder().type(Material.IRON_SWORD).name("�cSword").build();
+    private static final ItemStack shears = new ItemBuilder().type(Material.SHEARS).name("�cPliers").build();
+    private static final HashMap<Match, Integer> secondsToStart = new HashMap<>();
     public static List<Match> playingMatches = new ArrayList<>();
     public static List<Match> waitingMatches = new ArrayList<>();
     public static HashMap<Match, Integer> discussionTime = new HashMap<>();
@@ -35,13 +38,9 @@ public class Matches {
     public static List<Match> discussion = new ArrayList<>();
     public static List<Player> players = new ArrayList<>();
 
-    private static final ItemStack sword = new ItemBuilder().type(Material.IRON_SWORD).name("�cSword").build();
-
     public static ItemStack getImpostorSword() {
         return sword;
     }
-
-    private static final ItemStack shears = new ItemBuilder().type(Material.SHEARS).name("�cPliers").build();
 
     public static ItemStack getPliers() {
         return shears;
@@ -74,8 +73,6 @@ public class Matches {
         }
         return lastMatch;
     }
-
-    private static final HashMap<Match, Integer> secondsToStart = new HashMap<>();
 
     public static void run() {
         new BukkitRunnable() {
@@ -186,7 +183,9 @@ public class Matches {
                             if (discussionTime.get(match) == 0) {
                                 discussion.remove(match);
                                 discussionTime.remove(match);
-                                match.getPlayers().forEach(player -> player.openInventory(getVoting(match)));
+                                Bukkit.getScheduler().runTask(Main.instance, () -> {
+                                    match.getPlayers().forEach(player -> player.openInventory(getVoting(match)));
+                                });
                                 votingTime.put(match, 10);
                             }
                         }
