@@ -1,6 +1,6 @@
 name: CraftUs
 version: 1.0
-main: com.abidux.craftus.Main
+main: com.abidux.craftus.CraftUs
 author: abidux
 description: CraftUs by abidux
 api-version: 1.13

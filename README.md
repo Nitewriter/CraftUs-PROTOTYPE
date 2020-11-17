@@ -14,20 +14,7 @@ This plugin project is configure to be edited using [IntelliJ CE](https://www.je
 
 To support custom skulls, this plugin makes use of private Mojang APIs that are not provided by the `spigot-api` Maven dependency and can only be referenced from a Spigot server binary.
 
-You can download a pre-built Spigot binary from [getbukkit.org](https://getbukkit.org) or by building it from source using the [Spigot BuildTools](https://www.spigotmc.org/wiki/buildtools/). You will need the 1.16.4 version of the Spigot server binary.
-
-Once you have a server binary, place it in your user home directory at `minecraft/lib`.
-
-```bash
-# Move to your home directory
-cd ~
-
-# Make the Minecraft lib directory
-mkdir -p minecraft/lib
-
-# Copy the Spigot server jar to the lib directory
-cp /path/to/jar/spigot-1.16.4.jar ~/minecraft/lib/spigot-1.16.4.jar
-```
+You can build it from source using the [Spigot BuildTools](https://www.spigotmc.org/wiki/buildtools/). You will need the 1.16.4 version of the Spigot server binary.
 
 ### Debugging
 
@@ -43,7 +30,7 @@ Grant your player the `craftus.admin` permission to create maps and start matche
 | --- | --- |
 | reload | reloads the plugin configuration |
 | setlobby | sets the player lobby |
-| start | starts a match |
+| start | starts a gameMatch |
 | tasks | opens the crewTask menu |
 | setbutton | sets meeting button |
 | save | saves maps and tasks |
@@ -52,5 +39,20 @@ Grant your player the `craftus.admin` permission to create maps and start matche
 
 | Command | Description |
 | --- | --- |
-| lobby | teleports player to the lobby,<br />leaves current match if playing |
+| lobby | teleports player to the lobby,<br />leaves current gameMatch if playing |
 
+## Roadmap
+
+- Refine game loop update cycle
+- Define gameMatch maker controller
+- Move gameMatch state resolution to gameMatch
+- Refine player profile
+- Refine command executors
+- Refine menu system
+- Refine task system
+- Refine listeners, possibly define domain specific events
+    - Look in to delegation in Java
+    - Look in to event broadcast in Java
+- Refine armor stand dead player management
+- Refine task item for simpler map creation
+- Investigate mcMMO project for development practices we can barrow

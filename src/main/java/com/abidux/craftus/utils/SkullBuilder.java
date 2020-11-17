@@ -1,9 +1,12 @@
 package com.abidux.craftus.utils;
 
+import com.abidux.craftus.enums.PlayerSkinOld;
+import com.google.inject.Inject;
 import com.mojang.authlib.GameProfile;
-import com.mojang.authlib.properties.Property;
+import lombok.Getter;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import java.lang.reflect.Method;
@@ -11,20 +14,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Logger;
 
 public class SkullBuilder {
 
-    private final String encodedTextures;
-    private String name;
-    private List<String> lore;
+    @Getter private final UUID uniqueId;
+    @Getter private final String name;
+    @Getter private List<String> lore;
 
-    public SkullBuilder(String encodedTextures) {
-        this.encodedTextures = encodedTextures;
-    }
+    @Inject private Logger logger;
 
-    public SkullBuilder name(String name) {
+    public SkullBuilder(UUID uuid, String name) {
+        uniqueId = uuid;
         this.name = name;
-        return this;
     }
 
     public SkullBuilder lore(String... lore) {
@@ -34,30 +36,33 @@ public class SkullBuilder {
         return this;
     }
 
-    public ItemStack build() {
-        ItemStack head = new ItemStack(Material.PLAYER_HEAD, 1);
-        SkullMeta meta = (SkullMeta) head.getItemMeta();
-        setProfile(meta, encodedTextures);
-        if (!name.isEmpty()) {
-            meta.setDisplayName(name);
+    public ItemStack build(PlayerSkinOld playerSkin) {
+        ItemStack playerHead = new ItemStack(Material.PLAYER_HEAD, 1);
+        ItemMeta meta = playerHead.getItemMeta();
+        if (meta == null) {
+            return playerHead;
         }
+
+        SkullMeta skullMeta = (SkullMeta) playerHead.getItemMeta();
+        GameProfile gameProfile = playerSkin.getGameProfile(uniqueId, name);
+        setProfile(skullMeta, gameProfile);
+        skullMeta.setDisplayName(name);
+
         if (lore != null) {
-            meta.setLore(lore);
+            skullMeta.setLore(lore);
         }
-        head.setItemMeta(meta);
-        return head;
+
+        playerHead.setItemMeta(skullMeta);
+        return playerHead;
     }
 
-    private void setProfile(SkullMeta meta, String encodedTextures) {
-        GameProfile profile = new GameProfile(UUID.randomUUID(), null);
-        profile.getProperties().put("textures", new Property("textures", encodedTextures));
-
+    private void setProfile(SkullMeta skullMeta, GameProfile gameProfile) {
         try {
-            Method setProfile = meta.getClass().getDeclaredMethod("setProfile", GameProfile.class);
+            Method setProfile = skullMeta.getClass().getDeclaredMethod("setProfile", GameProfile.class);
             setProfile.setAccessible(true);
-            setProfile.invoke(meta, profile);
-        } catch (Exception e) {
-            e.printStackTrace();
+            setProfile.invoke(skullMeta, gameProfile);
+        } catch (Exception exception) {
+            logger.severe(exception.getMessage());
         }
     }
 

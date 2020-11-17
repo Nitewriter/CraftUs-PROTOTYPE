@@ -1,0 +1,24 @@
+{
+  "id": 233730070,
+  "idStr": "233730070",
+  "name": "amongRed",
+  "model": "steve",
+  "data": {
+    "uuid": "f8420619-0bb7-4dae-a590-00a147478531",
+    "texture": {
+      "value": "ewogICJ0aW1lc3RhbXAiIDogMTYwMzAyMDQ5OTU1MSwKICAicHJvZmlsZUlkIiA6ICIxNzhmMTJkYWMzNTQ0ZjRhYjExNzkyZDc1MDkzY2JmYyIsCiAgInByb2ZpbGVOYW1lIiA6ICJzaWxlbnRkZXRydWN0aW9uIiwKICAic2lnbmF0dXJlUmVxdWlyZWQiIDogdHJ1ZSwKICAidGV4dHVyZXMiIDogewogICAgIlNLSU4iIDogewogICAgICAidXJsIiA6ICJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlL2NhNGRhNjdhYTA1MTA4MjY0NjM5NWI4ZGZmZmJlOGFkZTA5NDY4ZWM5NWUxNzkzNWMyYWY1OGMwOWM2ZWE4NmIiCiAgICB9CiAgfQp9",
+      "signature": "BN+4RJ1IRvDiUtz1EXG1MFZeJT8gbrqIj1VUNvTAm/fltKL3iJlDLBsxiolXRNna9l0xtyy07M8v5laLEtm3h4+Tn9oEApvutt8Zk/q1VenxWtJ4x6zEereLKS3sk87+owWIi7dPqONQLugfENDZEUekTOe+D+2lnP6+bIy0h6txCbLg+ngBRlF9lTL8MyGYyfwPrfy1Q/ebXkO30fqWdhR3WjRZrSjxHjDBZdIdzDdEL7p8UIgw5k+Nxs0NOJUjEoJ9wxH1xOUD6X5MDqDEL7PReFsIC2TIlwpi9j77ZyYi5SlYOYgY0RLNRzcw01fuxlXdA0DBUqgJcR1QoQ7iRp1p7uCS/6ExLjU9P5dveIaF+3ir43xVgr11jp8GdE4NXFeGnPq5iKC88xpmwOMrGmJ4n2G8iI8pKu3Mlskup5mr1D/BWlWMPKIDUK4muQ6Sye2a5/ANdT8GW0VGSNEIWm9ttQLyN7PAvzsN5c8SoRW1Stzd4jf5RDHeKzq/tZRMV/ClGTIO95v6LFRatWEiA5MLQPa/R+zOyjymA1J77tG3aBgQA5ryFshYufQOORr6t/YtYpa5YuhdivG/0pl0bgh3g7bnrjLKU9Eo1AspZGKqcWlYakpcLpa20cPvSkhuoXHnlitBmpDqPOs86ZApTDVwrDKjgZaCShj3V7RjNhw=",
+      "url": "http://textures.minecraft.net/texture/ca4da67aa051082646395b8dfffbe8ade09468ec95e17935c2af58c09c6ea86b",
+      "urls": {
+        "skin": "http://textures.minecraft.net/texture/ca4da67aa051082646395b8dfffbe8ade09468ec95e17935c2af58c09c6ea86b"
+      }
+    }
+  },
+  "timestamp": 1603020500,
+  "duration": 10307,
+  "accountId": 241,
+  "server": "melon",
+  "private": false,
+  "views": 11,
+  "nextRequest": 0
+}
